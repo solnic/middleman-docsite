@@ -2,12 +2,83 @@ PATH
   remote: .
   specs:
     middleman-docsite (0.1.0)
+      middleman-core (= 5.0.0.rc.1)
+      redcarpet (~> 3.5)
+      tilt (~> 2.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (5.2.3)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
+    backports (3.15.0)
+    byebug (11.0.1)
+    concurrent-ruby (1.1.5)
+    contracts (0.16.0)
     diff-lcs (1.3)
+    dotenv (2.7.5)
+    erubis (2.7.0)
+    execjs (2.7.0)
+    fastimage (2.1.7)
+    ffi (1.11.1)
+    hamster (3.0.0)
+      concurrent-ruby (~> 1.0)
+    hashie (3.6.0)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
+    lazy_priority_queue (0.1.1)
+    listen (3.1.5)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
+    memoist (0.16.0)
+    middleman-core (5.0.0.rc.1)
+      activesupport (~> 5.2)
+      addressable (~> 2.3)
+      backports (~> 3.11)
+      bundler
+      contracts (~> 0.16.0)
+      dotenv
+      erubis
+      execjs (~> 2.0)
+      fastimage (~> 2.0)
+      hamster (~> 3.0)
+      hashie (~> 3.4)
+      i18n (~> 0.9.0)
+      listen (~> 3.0)
+      memoist (~> 0.14)
+      oj (~> 3.7)
+      padrino-helpers (~> 0.14.4)
+      parallel
+      rack (>= 1.4.5, < 3)
+      rgl (~> 0.5.3)
+      sassc (~> 2.0)
+      servolux
+      tilt (~> 2.0.9)
+      uglifier (~> 4.1)
+    minitest (5.12.2)
+    oj (3.9.1)
+    padrino-helpers (0.14.4)
+      i18n (~> 0.6, >= 0.6.7)
+      padrino-support (= 0.14.4)
+      tilt (>= 1.4.1, < 3)
+    padrino-support (0.14.4)
+    parallel (1.17.0)
+    public_suffix (4.0.1)
+    rack (2.0.7)
     rake (13.0.0)
+    rb-fsevent (0.10.3)
+    rb-inotify (0.10.0)
+      ffi (~> 1.0)
+    redcarpet (3.5.0)
+    rgl (0.5.6)
+      lazy_priority_queue (~> 0.1.0)
+      stream (~> 0.5.2)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -21,11 +92,23 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.2)
+    ruby_dep (1.5.0)
+    sassc (2.2.1)
+      ffi (~> 1.9)
+    servolux (0.13.0)
+    stream (0.5.2)
+    thread_safe (0.3.6)
+    tilt (2.0.10)
+    tzinfo (1.2.5)
+      thread_safe (~> 0.1)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   middleman-docsite!
   rake
   rspec

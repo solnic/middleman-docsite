@@ -4,11 +4,11 @@ require 'middleman/docsite/markdown/admonitions'
 require 'middleman/docsite/markdown/table_of_contents'
 
 module Middleman
-  module Site
+  module Docsite
     module Markdown
       module Preprocessors
-        include Site::Markdown::Admonitions
-        include Site::Markdown::TableOfContents
+        include Docsite::Markdown::Admonitions
+        include Docsite::Markdown::TableOfContents
 
         def preprocess(document)
           renderer = self.class.new(@local_options)

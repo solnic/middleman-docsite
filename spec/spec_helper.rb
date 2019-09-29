@@ -1,5 +1,9 @@
-require "bundler/setup"
-require "middleman/docsite"
+require 'bundler/setup'
+require 'byebug'
+
+require 'middleman/docsite'
+
+Middleman::Docsite.root = Pathname(__dir__).realpath
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

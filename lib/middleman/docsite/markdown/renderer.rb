@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 require 'tilt'
+require 'middleman-core'
 require 'middleman-core/renderers/redcarpet'
 require 'middleman/docsite/markdown/preprocessors'
 
 module Middleman
-  module Site
+  module Docsite
     module Markdown
       class Renderer < Middleman::Renderers::MiddlemanRedcarpetHTML
-        include Site::Markdown::Preprocessors
+        include Docsite::Markdown::Preprocessors
 
         DEFAULT_OPTS = {
           tables: true,
