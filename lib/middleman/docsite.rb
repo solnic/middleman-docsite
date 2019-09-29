@@ -7,15 +7,14 @@ require 'middleman/docsite/version'
 require 'middleman/docsite/project'
 require 'middleman/docsite/markdown'
 
+require 'dry/configurable'
+
 module Middleman
   module Docsite
-    class << self
-      attr_accessor :project_class
-      attr_accessor :root
-    end
+    extend Dry::Configurable
 
-    self.root = Pathname(Dir.pwd).realpath
-    self.project_class = Docsite::Project
+    setting :project_class, Docsite::Project, reader: true
+    setting :root, Pathname(Dir.pwd).realpath, reader: true
 
     def self.projects
       @projects ||= YAML.load_file(data_path.join('projects.yml'))

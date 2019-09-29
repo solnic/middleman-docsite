@@ -3,7 +3,9 @@ require 'byebug'
 
 require 'middleman/docsite'
 
-Middleman::Docsite.root = Pathname(__dir__).realpath
+Middleman::Docsite.configure do |config|
+  config.root = Pathname(__dir__).realpath
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
