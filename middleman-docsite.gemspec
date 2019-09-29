@@ -27,4 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'middleman-core', '5.0.0.rc.1'
   spec.add_runtime_dependency 'tilt', '~> 2.0'
   spec.add_runtime_dependency 'redcarpet', '~> 3.5'
+  spec.add_runtime_dependency 'dry-types', '~> 1.1'
+  spec.add_runtime_dependency 'dry-struct', '~> 1.0'
 end

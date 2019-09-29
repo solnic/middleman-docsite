@@ -1,17 +1,15 @@
 # frozen_string_literal: true
 
+require 'dry/struct'
+require 'middleman/docsite/types'
+
 module Middleman
   module Docsite
-    class Project
-      attr_reader :attrs
+    class Project < Dry::Struct
+      transform_keys(&:to_sym)
 
-      def initialize(attrs)
-        @attrs = attrs
-      end
+      attribute :name, Types::String
 
-      def name
-        attrs['name']
-      end
       alias_method :to_s, :name
 
       def github_url
