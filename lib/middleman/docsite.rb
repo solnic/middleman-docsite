@@ -14,7 +14,7 @@ module Middleman
       attr_accessor :root
     end
 
-    self.root = Dir.pwd
+    self.root = Pathname(Dir.pwd).realpath
     self.project_class = Docsite::Project
 
     def self.projects
