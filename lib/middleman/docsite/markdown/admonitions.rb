@@ -7,7 +7,7 @@ module Middleman
             <<~HTML
               <div role="note" aria-label="#{label}" class="application-notice #{type}-notice">
                 <div class="notice-title">
-                  <i class="fa fa-info-circle"></i> Note
+                  <i class="fa fa-info-circle"></i> #{label}
                 </div>
                 #{markdown.render(Regexp.last_match(1))}
               </div>
@@ -23,7 +23,7 @@ module Middleman
         #    in a nice blue notice box.
         #   ^
         def information(*args)
-          admonition(*args, type: :info, label: "Information")
+          admonition(*args, type: :info, label: "Info")
         end
 
         # Preprocessor to wrap the contents of '^WARNING' marks in a warning html notice
