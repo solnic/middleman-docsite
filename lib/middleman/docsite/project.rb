@@ -33,7 +33,7 @@ module Middleman
       end
 
       def version_badge
-        "https://img.shields.io/gem/v/#{name}.svg?style=flat"
+        "https://badge.fury.io/rb/#{name}.svg"
       end
 
       def ci_badge
