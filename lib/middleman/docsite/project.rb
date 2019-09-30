@@ -6,7 +6,19 @@ require 'middleman/docsite/types'
 module Middleman
   module Docsite
     class Project < Dry::Struct
+      Types = Middleman::Docsite::Types
+
       transform_keys(&:to_sym)
+
+      transform_types do |type|
+        if type.default?
+          type.constructor do |value|
+            value.nil? ? Dry::Types::Undefined : value
+          end
+        else
+          type
+        end
+      end
 
       attribute :name, Types::String
 
