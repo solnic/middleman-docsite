@@ -44,7 +44,7 @@ RSpec.describe Middleman::Docsite do
 
       site.symlink_repo(project, branch: 'doc-importer')
 
-      symlink_path = site.root.join('source/gems/middleman-docsite')
+      symlink_path = site.root.join('source/gems/middleman-docsite/doc-importer')
 
       expect(symlink_path).to exist
 

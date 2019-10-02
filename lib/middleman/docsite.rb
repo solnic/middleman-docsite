@@ -41,17 +41,20 @@ module Middleman
       system "git clone #{repo} #{dest}"
     end
 
-    def self.symlink_repo(project, branch: nil)
+    def self.symlink_repo(project, branch:)
       name = project.name
 
-      system "cd #{projects_dir.join(name)} && git checkout #{branch}" if branch
+      system "cd #{projects_dir.join(name)} && git checkout #{branch}"
 
       from = projects_dir.join(name).join('docsite/source').realpath
-      dest = source_dir.join(name)
+      dir = source_dir.join(name)
+      link = dir.join(branch)
 
-      puts "Symlinking #{from} => #{dest}"
+      FileUtils.mkdir_p(dir)
 
-      system "ln -s #{from} #{dest}"
+      puts "Symlinking #{from} => #{link}"
+
+      system "ln -s #{from} #{link}"
     end
 
     def self.projects_dir
