@@ -19,6 +19,7 @@ RSpec.describe Middleman::Docsite do
       expect(p2.name).to eql('middleman-docsite')
       expect(p2.repo?).to be(true)
       expect(p2.repo).to eql('https://github.com/solnic/middleman-docsite.git')
+      expect(p2.versions).to eql([{ version: '0.1', branch: 'doc-importer' }])
     end
   end
 
@@ -44,7 +45,7 @@ RSpec.describe Middleman::Docsite do
 
       site.symlink_repo(project, branch: 'doc-importer')
 
-      symlink_path = site.root.join('source/gems/middleman-docsite/doc-importer')
+      symlink_path = site.root.join('source/gems/middleman-docsite/0.1')
 
       expect(symlink_path).to exist
 

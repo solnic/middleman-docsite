@@ -22,11 +22,16 @@ module Middleman
 
       attribute :name, Types::String
       attribute? :repo, Types::String
+      attribute? :versions, Types::Versions
 
       alias_method :to_s, :name
 
       def repo?
         !repo.nil?
+      end
+
+      def version_from_branch(branch)
+        versions.detect { |version| version[:branch].eql?(branch) }.fetch(:version)
       end
 
       def github_url

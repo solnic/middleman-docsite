@@ -46,9 +46,11 @@ module Middleman
 
       system "cd #{projects_dir.join(name)} && git checkout #{branch}"
 
+      version = project.version_from_branch(branch)
+
       from = projects_dir.join(name).join('docsite/source').realpath
       dir = source_dir.join(name)
-      link = dir.join(branch)
+      link = dir.join(version)
 
       FileUtils.mkdir_p(dir)
 
