@@ -3,3 +3,9 @@
   versions:
     - "0.1"
     - "0.2"
+-
+  name: "middleman-docsite"
+  repo: "https://github.com/solnic/middleman-docsite.git"
+  versions:
+    - "0.1"
+    - "0.2"

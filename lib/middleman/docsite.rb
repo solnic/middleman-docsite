@@ -28,5 +28,19 @@ module Middleman
     def self.development?
       ENV['BUILD'] != 'true'
     end
+
+    def self.clone_repo(project)
+      repo = project.repo
+      name = project.name
+      dest = projects_dir.join(name)
+
+      puts "Cloning #{repo} to #{dest}"
+
+      system "git clone #{repo} #{dest}"
+    end
+
+    def self.projects_dir
+      root.join('projects')
+    end
   end
 end

@@ -21,8 +21,13 @@ module Middleman
       end
 
       attribute :name, Types::String
+      attribute? :repo, Types::String
 
       alias_method :to_s, :name
+
+      def repo?
+        !repo.nil?
+      end
 
       def github_url
         "https://github.com/#{org}/#{name}"

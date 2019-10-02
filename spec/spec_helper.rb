@@ -17,4 +17,12 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.before(:each) do
+    FileUtils.rm_r(Dir[Middleman::Docsite.projects_dir.join('*')])
+  end
+
+  config.after(:each) do
+    FileUtils.rm_r(Dir[Middleman::Docsite.projects_dir.join('*')])
+  end
 end
