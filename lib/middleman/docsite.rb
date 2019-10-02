@@ -34,6 +34,8 @@ module Middleman
       name = project.name
       dest = projects_dir.join(name)
 
+      return if dest.exist?
+
       puts "Cloning #{repo} to #{dest}"
 
       system "git clone #{repo} #{dest}"
