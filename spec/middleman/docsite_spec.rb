@@ -15,6 +15,7 @@ RSpec.describe Middleman::Docsite do
 
       expect(p1.name).to eql('Test Project')
       expect(p1.repo?).to be(false)
+      expect(p1.versions).to eql(['0.1', '0.2'])
 
       expect(p2.name).to eql('middleman-docsite')
       expect(p2.repo?).to be(true)

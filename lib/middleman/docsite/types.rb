@@ -13,7 +13,7 @@ module Middleman
         )
         .with_key_transform(&:to_sym)
 
-      Versions = Types::Array.of(Version)
+      Versions = Types::Array.of(String | Version)
     end
   end
 end
