@@ -33,4 +33,28 @@ RSpec.describe Middleman::Docsite do
       expect(site.projects_dir.join('middleman-docsite')).to exist
     end
   end
+
+  describe '#symlink_repo' do
+    let(:project) do
+      projects.detect { |project| project.name.eql?('middleman-docsite') }
+    end
+
+    it 'symlink project repository' do
+      site.clone_repo(project)
+
+      site.symlink_repo(project, branch: 'doc-importer')
+
+      symlink_path = site.root.join('source/gems/middleman-docsite')
+
+      expect(symlink_path).to exist
+
+      source_files = Dir[symlink_path.join('**/*.*')]
+        .map(&Pathname.method(:new)).map(&:basename)
+
+      target_files = Dir[site.root.join('../docsite/**/*.*')]
+        .map(&Pathname.method(:new)).map(&:basename)
+
+      expect(source_files).to eql(target_files)
+    end
+  end
 end

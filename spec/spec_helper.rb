@@ -24,5 +24,6 @@ RSpec.configure do |config|
 
   config.after(:each) do
     FileUtils.rm_r(Dir[Middleman::Docsite.projects_dir.join('*')])
+    FileUtils.rm_r(Dir[Middleman::Docsite.source_dir.join('*')])
   end
 end

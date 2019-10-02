@@ -39,8 +39,25 @@ module Middleman
       system "git clone #{repo} #{dest}"
     end
 
+    def self.symlink_repo(project, branch: nil)
+      name = project.name
+
+      system "cd #{projects_dir.join(name)} && git checkout #{branch}" if branch
+
+      from = projects_dir.join(name).join('docsite/source').realpath
+      dest = source_dir.join(name)
+
+      puts "Symlinking #{from} => #{dest}"
+
+      system "ln -s #{from} #{dest}"
+    end
+
     def self.projects_dir
       root.join('projects')
+    end
+
+    def self.source_dir
+      root.join('source/gems')
     end
   end
 end
