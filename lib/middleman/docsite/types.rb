@@ -7,7 +7,7 @@ module Middleman
 
       Version = Types::Hash
         .schema(
-          version: Types::String,
+          value: Types::String,
           branch?: Types::String,
           tag?: Types::String
         )

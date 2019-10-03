@@ -20,7 +20,7 @@ RSpec.describe Middleman::Docsite do
       expect(p2.name).to eql('middleman-docsite')
       expect(p2.repo?).to be(true)
       expect(p2.repo).to eql('https://github.com/solnic/middleman-docsite.git')
-      expect(p2.versions).to eql([{ version: '0.1', branch: 'doc-importer' }])
+      expect(p2.versions).to eql([{ value: '0.1', branch: 'doc-importer' }])
     end
   end
 

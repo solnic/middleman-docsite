@@ -8,5 +8,5 @@
   repo: "https://github.com/solnic/middleman-docsite.git"
   versions:
     -
-      version: "0.1"
+      value: "0.1"
       branch: "doc-importer"

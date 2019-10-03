@@ -31,7 +31,7 @@ module Middleman
       end
 
       def version_from_branch(branch)
-        versions.detect { |version| version[:branch].eql?(branch) }.fetch(:version)
+        versions.detect { |version| version[:branch].eql?(branch) }.fetch(:value)
       end
 
       def github_url
