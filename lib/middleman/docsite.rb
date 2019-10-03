@@ -43,7 +43,9 @@ module Middleman
       end
     end
 
-    def self.symlink_repo(project, branch:)
+    def self.symlink_repo(project, options = {})
+      branch, _tag = options.values_at(:branch, :tag)
+
       name = project.name
 
       system "cd #{projects_dir.join(name)} && git checkout #{branch}"
