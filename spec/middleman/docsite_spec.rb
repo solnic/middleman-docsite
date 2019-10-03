@@ -48,7 +48,7 @@ RSpec.describe Middleman::Docsite do
     end
 
     it 'symlink project repository' do
-      site.clone_repo(project)
+      site.clone_repo(project, branch: 'doc-importer')
 
       site.symlink_repo(project, branch: 'doc-importer')
 

@@ -29,30 +29,29 @@ module Middleman
       ENV['BUILD'] != 'true'
     end
 
-    def self.clone_repo(project)
+    def self.clone_repo(project, branch: 'master')
       repo = project.repo
       name = project.name
-      dest = projects_dir.join(name)
+      dest = projects_dir.join(name).join(branch)
 
       if dest.exist?
         puts "Updating #{dest} clone"
         system "cd #{dest} && git pull"
       else
-        puts "Cloning #{repo} to #{dest}"
-        system "git clone #{repo} #{dest}"
+        puts "Cloning #{branch} branch from #{repo} to #{dest}"
+        system "git clone --single-branch --branch #{branch} #{repo} #{dest}"
       end
     end
 
     def self.symlink_repo(project, options = {})
-      branch, _tag = options.values_at(:branch, :tag)
+      branch = options.fetch(:branch)
 
       name = project.name
-
-      system "cd #{projects_dir.join(name)} && git checkout #{branch}"
-
       version = project.version_from_branch(branch)
 
-      from = projects_dir.join(name).join('docsite/source').realpath
+      clone_dir = projects_dir.join(name).join(branch)
+
+      from = clone_dir.join('docsite/source').realpath
       dir = source_dir.join(name)
       link = dir.join(version)
 
