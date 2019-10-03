@@ -53,7 +53,7 @@ RSpec.describe Middleman::Docsite do
       source_files = Dir[symlink_path.join('**/*.*')]
         .map(&Pathname.method(:new)).map(&:basename)
 
-      target_files = Dir[site.root.join('../docsite/**/*.*')]
+      target_files = Dir[FIXTURES.join('test-gem/docsite/**/*.*')]
         .map(&Pathname.method(:new)).map(&:basename)
 
       expect(source_files).to eql(target_files)
