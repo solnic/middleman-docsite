@@ -34,11 +34,13 @@ module Middleman
       name = project.name
       dest = projects_dir.join(name)
 
-      return if dest.exist?
-
-      puts "Cloning #{repo} to #{dest}"
-
-      system "git clone #{repo} #{dest}"
+      if dest.exist?
+        puts "Updating #{dest} clone"
+        system "cd #{dest} && git pull"
+      else
+        puts "Cloning #{repo} to #{dest}"
+        system "git clone #{repo} #{dest}"
+      end
     end
 
     def self.symlink_repo(project, branch:)

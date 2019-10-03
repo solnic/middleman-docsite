@@ -34,6 +34,12 @@ RSpec.describe Middleman::Docsite do
 
       expect(site.projects_dir.join('middleman-docsite')).to exist
     end
+
+    it 'updates project repository when clone exists' do
+      2.times { site.clone_repo(project) }
+
+      expect(site.projects_dir.join('middleman-docsite')).to exist
+    end
   end
 
   describe '#symlink_repo' do
