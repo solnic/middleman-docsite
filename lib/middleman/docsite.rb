@@ -19,6 +19,7 @@ module Middleman
     def self.projects
       @projects ||= YAML.load_file(data_path.join('projects.yml'))
         .map(&project_class.method(:new))
+        .sort_by(&:name)
     end
 
     def self.data_path
