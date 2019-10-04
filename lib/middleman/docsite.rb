@@ -36,7 +36,7 @@ module Middleman
 
       if dest.exist?
         puts "Updating #{dest} clone"
-        system "cd #{dest} && git pull"
+        system "cd #{dest} && git pull --rebase"
       else
         puts "Cloning #{branch} branch from #{repo} to #{dest}"
         system "git clone --single-branch --branch #{branch} #{repo} #{dest}"
