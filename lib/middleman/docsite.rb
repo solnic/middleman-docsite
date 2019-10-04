@@ -60,7 +60,7 @@ module Middleman
 
       puts "Symlinking #{from} => #{link}"
 
-      system "ln -s #{from} #{link}"
+      system "ln -sf #{from} #{link}"
     end
 
     def self.projects_dir
