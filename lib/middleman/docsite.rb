@@ -61,7 +61,9 @@ module Middleman
       dir = source_dir.join(name)
       link = dir.join(version)
 
-      FileUtils.mkdir_p(dir)
+      return if link.exist?
+
+      FileUtils.mkdir_p(dir) unless dir.exist?
 
       puts "Symlinking #{link.to_s.gsub("#{root}/", '')} => #{from.to_s.gsub("#{root}/", "")}"
 
