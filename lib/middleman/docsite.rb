@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'pathname'
+require "open3"
 
 require 'middleman/docsite/version'
 require 'middleman/docsite/project'
@@ -37,10 +38,14 @@ module Middleman
 
       if dest.exist?
         puts "Updating #{dest} clone"
-        system "cd #{dest} && git pull --rebase"
+        shell 'git pull --rebase', chdir: dest
       else
         puts "Cloning #{branch} branch from #{repo} to #{dest}"
-        system "git clone --single-branch --branch #{branch} #{repo} #{dest}"
+
+        shell(
+          "git clone --single-branch --branch #{branch} #{repo} #{name}/#{branch}",
+          chdir: projects_dir
+        )
       end
     end
 
@@ -60,7 +65,7 @@ module Middleman
 
       puts "Symlinking #{from} => #{link}"
 
-      system "ln -sf #{from} #{link}"
+      shell "ln -sf #{from} #{link}"
     end
 
     def self.projects_dir
@@ -69,6 +74,17 @@ module Middleman
 
     def self.source_dir
       root.join('source/gems')
+    end
+
+    def self.shell(cmd, opts = {})
+      Open3.popen3(cmd, opts) { |_stdin, _stdout, stderr, wait_thr|
+        status = wait_thr.value
+
+        unless status.success?
+          puts "shell command crashed: #{stderr.read}"
+          exit status.to_i
+        end
+      }
     end
   end
 end
