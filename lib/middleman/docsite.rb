@@ -33,17 +33,17 @@ module Middleman
 
     def self.clone_repo(project, branch: 'master')
       repo = project.repo
-      name = project.name
-      dest = projects_dir.join(name).join(branch)
+      name = "#{project.name}/#{branch}"
+      dest = projects_dir.join(name)
 
       if dest.exist?
-        puts "Updating #{dest} clone"
+        puts "Updating #{name} clone"
         shell 'git pull --rebase', chdir: dest
       else
-        puts "Cloning #{branch} branch from #{repo} to #{dest}"
+        puts "Cloning #{branch} branch from #{repo} to projects/#{name}"
 
         shell(
-          "git clone --single-branch --branch #{branch} #{repo} #{name}/#{branch}",
+          "git clone --single-branch --branch #{branch} #{repo} #{name}",
           chdir: projects_dir
         )
       end
@@ -63,7 +63,7 @@ module Middleman
 
       FileUtils.mkdir_p(dir)
 
-      puts "Symlinking #{from} => #{link}"
+      puts "Symlinking #{link.to_s.gsub("#{root}/", '')} => #{from.to_s.gsub("#{root}/", "")}"
 
       shell "ln -sf #{from} #{link}"
     end
