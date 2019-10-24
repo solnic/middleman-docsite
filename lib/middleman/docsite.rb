@@ -15,6 +15,7 @@ module Middleman
     extend Dry::Configurable
 
     setting :project_class, Docsite::Project, reader: true
+    setting :projects_subdir, 'gems', reader: true
     setting :root, Pathname(Dir.pwd).realpath, reader: true
 
     def self.projects
@@ -75,7 +76,7 @@ module Middleman
     end
 
     def self.source_dir
-      root.join('source/gems')
+      root.join("source/#{projects_subdir}")
     end
 
     def self.shell(cmd, opts = {})
