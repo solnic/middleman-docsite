@@ -16,3 +16,12 @@
     -
       value: "0.1"
       branch: "doc-importer"
+-
+  name: "sub-project"
+  repo:
+    url: "https://github.com/solnic/middleman-docsite.git"
+    dir: "sub_project"
+  versions:
+    -
+      value: "0.3"
+      branch: "master"

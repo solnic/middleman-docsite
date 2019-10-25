@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dry/types'
 
 module Middleman
@@ -5,7 +7,8 @@ module Middleman
     module Types
       include Dry.Types
 
-      Repo = Types::String | Types::Hash.schema(url: Types::String, dir: Types::String)
+      Repo = Types::String |
+             Types::Hash.schema(url: Types::String, dir: Types::String).with_key_transform(&:to_sym)
 
       Version = Types::Hash
         .schema(

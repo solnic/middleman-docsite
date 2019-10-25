@@ -9,7 +9,7 @@ RSpec.describe Middleman::Docsite do
 
   describe '#projects' do
     it 'returns projects loaded from data/projects.yml' do
-      expect(projects.size).to be(3)
+      expect(projects.size).to be(4)
 
       p1, p2, p3 = projects
 
@@ -48,26 +48,52 @@ RSpec.describe Middleman::Docsite do
   end
 
   describe '#symlink_repo' do
-    let(:project) do
-      projects.detect { |project| project.name.eql?('middleman-docsite') }
+    context 'with a top-level project' do
+      let(:project) do
+        projects.detect { |project| project.name.eql?('middleman-docsite') }
+      end
+
+      it 'symlinks project repository' do
+        site.clone_repo(project, branch: 'doc-importer')
+
+        site.symlink_repo(project, branch: 'doc-importer')
+
+        symlink_path = site.root.join('source/gems/middleman-docsite/0.1')
+
+        expect(symlink_path).to exist
+
+        source_files = Dir[symlink_path.join('**/*.*')]
+          .map(&Pathname.method(:new)).map(&:basename)
+
+        target_files = Dir[FIXTURES.join('test-gem/docsite/**/*.*')]
+          .map(&Pathname.method(:new)).map(&:basename)
+
+        expect(source_files).to eql(target_files)
+      end
     end
 
-    it 'symlink project repository' do
-      site.clone_repo(project, branch: 'doc-importer')
+    context 'with a sub-project' do
+      let(:project) do
+        projects.detect { |project| project.name.eql?('sub-project') }
+      end
 
-      site.symlink_repo(project, branch: 'doc-importer')
+      it 'symlinks sub-project dir from the repository' do
+        site.clone_repo(project, branch: 'master')
 
-      symlink_path = site.root.join('source/gems/middleman-docsite/0.1')
+        site.symlink_repo(project, branch: 'master')
 
-      expect(symlink_path).to exist
+        symlink_path = site.root.join('source/gems/sub-project/0.3')
 
-      source_files = Dir[symlink_path.join('**/*.*')]
-        .map(&Pathname.method(:new)).map(&:basename)
+        expect(symlink_path).to exist
 
-      target_files = Dir[FIXTURES.join('test-gem/docsite/**/*.*')]
-        .map(&Pathname.method(:new)).map(&:basename)
+        source_files = Dir[symlink_path.join('**/*.*')]
+          .map(&Pathname.method(:new)).map(&:basename)
 
-      expect(source_files).to eql(target_files)
+        target_files = Dir[FIXTURES.join('test-gem/sub_project/docsite/**/*.*')]
+          .map(&Pathname.method(:new)).map(&:basename)
+
+        expect(source_files).to eql(target_files)
+      end
     end
   end
 end

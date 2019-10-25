@@ -34,6 +34,14 @@ module Middleman
         repo.is_a?(Hash) ? repo[:url] : repo
       end
 
+      def dir_name
+        sub_project? ? repo[:dir] : name
+      end
+
+      def sub_project?
+        repo.is_a?(Hash) && repo[:dir]
+      end
+
       def version_from_branch(branch)
         versions.detect { |version| version[:branch].eql?(branch) }.fetch(:value)
       end
