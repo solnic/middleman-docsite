@@ -21,13 +21,17 @@ module Middleman
       end
 
       attribute :name, Types::String
-      attribute? :repo, Types::String
+      attribute? :repo, Types::Repo
       attribute? :versions, Types::Versions
 
       alias_method :to_s, :name
 
       def repo?
         !repo.nil?
+      end
+
+      def repo_url
+        repo.is_a?(Hash) ? repo[:url] : repo
       end
 
       def version_from_branch(branch)

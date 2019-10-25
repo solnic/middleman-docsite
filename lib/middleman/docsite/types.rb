@@ -5,6 +5,8 @@ module Middleman
     module Types
       include Dry.Types
 
+      Repo = Types::String | Types::Hash.schema(url: Types::String, dir: Types::String)
+
       Version = Types::Hash
         .schema(
           value: Types::String,

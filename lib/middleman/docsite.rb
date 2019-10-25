@@ -33,7 +33,7 @@ module Middleman
     end
 
     def self.clone_repo(project, branch: 'master')
-      repo = project.repo
+      repo = project.repo_url
       name = "#{project.name}/#{branch}"
       dest = projects_dir.join(name)
 

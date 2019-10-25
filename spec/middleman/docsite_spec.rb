@@ -9,18 +9,23 @@ RSpec.describe Middleman::Docsite do
 
   describe '#projects' do
     it 'returns projects loaded from data/projects.yml' do
-      expect(projects.size).to be(2)
+      expect(projects.size).to be(3)
 
-      p1, p2 = projects
+      p1, p2, p3 = projects
 
-      expect(p1.name).to eql('Test Project')
-      expect(p1.repo?).to be(false)
+      expect(p1.name).to eql('Repo Project')
+      expect(p1.repo?).to be(true)
+      expect(p1.repo).to eql('https://some.repo.git')
       expect(p1.versions).to eql(['0.1', '0.2'])
 
-      expect(p2.name).to eql('middleman-docsite')
-      expect(p2.repo?).to be(true)
-      expect(p2.repo).to eql('https://github.com/solnic/middleman-docsite.git')
-      expect(p2.versions).to eql([{ value: '0.1', branch: 'doc-importer' }])
+      expect(p2.name).to eql('Test Project')
+      expect(p2.repo?).to be(false)
+      expect(p2.versions).to eql(['0.1', '0.2'])
+
+      expect(p3.name).to eql('middleman-docsite')
+      expect(p3.repo?).to be(true)
+      expect(p3.repo).to eql('https://github.com/solnic/middleman-docsite.git')
+      expect(p3.versions).to eql([{ value: '0.1', branch: 'doc-importer' }])
     end
   end
 
