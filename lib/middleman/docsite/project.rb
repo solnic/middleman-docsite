@@ -21,10 +21,11 @@ module Middleman
       end
 
       attribute :name, Types::String
+      attribute? :slug, Types::String
       attribute? :repo, Types::Repo
       attribute? :versions, Types::Versions
 
-      alias_method :to_s, :name
+      alias_method :to_s, :slug
 
       def repo?
         !repo.nil?
@@ -36,6 +37,10 @@ module Middleman
 
       def dir_name
         sub_project? ? repo[:dir] : name
+      end
+
+      def slug
+        @attributes[:slug] || name
       end
 
       def sub_project?

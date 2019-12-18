@@ -55,6 +55,7 @@ module Middleman
       branch = options.fetch(:branch)
 
       name = project.name
+      slug = project.slug
       project_dir = project.dir_name
       version = project.version_from_branch(branch)
 
@@ -66,7 +67,7 @@ module Middleman
         end
 
       from = clone_dir.join('docsite/source').realpath
-      dir = source_dir.join(name)
+      dir = source_dir.join(slug)
       link = dir.join(version)
 
       return if link.exist?
