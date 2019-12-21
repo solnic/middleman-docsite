@@ -51,6 +51,10 @@ module Middleman
         versions.detect { |version| version[:branch].eql?(branch) }.fetch(:value)
       end
 
+      def latest_version
+        versions.map(&Gem::Version.method(:new)).max.to_s
+      end
+
       def github_url
         "https://github.com/#{org}/#{name}"
       end
