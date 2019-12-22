@@ -5,7 +5,7 @@ RSpec.describe Middleman::Docsite do
     Middleman::Docsite
   end
 
-  let(:projects) { Middleman::Docsite.projects }
+  let(:projects) { Middleman::Docsite.projects.sort_by(&:name) }
 
   describe '#projects' do
     it 'returns projects loaded from data/projects.yml' do
