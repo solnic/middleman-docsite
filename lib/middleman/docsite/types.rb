@@ -8,7 +8,11 @@ module Middleman
       include Dry.Types
 
       Repo = Types::String |
-             Types::Hash.schema(url: Types::String, dir: Types::String).with_key_transform(&:to_sym)
+             Types::Hash.schema(
+               url: Types::String,
+               dir: Types::String,
+               component?: Types::Bool.default(false)
+             ).with_key_transform(&:to_sym)
 
       Version = Types::Hash
         .schema(

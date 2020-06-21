@@ -25,3 +25,13 @@
     -
       value: "0.3"
       branch: "master"
+-
+  name: "component"
+  repo:
+    url: "/Users/solnic/Workspace/middleman-docsite"
+    dir: "component"
+    component: true
+  versions:
+    -
+      value: "0.4"
+      branch: "master"

@@ -95,5 +95,29 @@ RSpec.describe Middleman::Docsite do
         expect(source_files).to eql(target_files)
       end
     end
+
+    context 'with a sub-component' do
+      let(:project) do
+        projects.detect { |project| project.name.eql?('component') }
+      end
+
+      it 'symlinks sub-component dir from the repository' do
+        site.clone_repo(project, branch: 'master')
+
+        site.symlink_repo(project, branch: 'master')
+
+        symlink_path = site.root.join('source/gems/component/0.4')
+
+        expect(symlink_path).to exist
+
+        source_files = Dir[symlink_path.join('**/*.*')]
+          .map(&Pathname.method(:new)).map(&:basename)
+
+        target_files = Dir[FIXTURES.join('test-gem/docsite/component/**/*.*')]
+          .map(&Pathname.method(:new)).map(&:basename)
+
+        expect(source_files).to eql(target_files)
+      end
+    end
   end
 end

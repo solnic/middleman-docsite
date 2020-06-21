@@ -27,6 +27,10 @@ module Middleman
 
       alias_method :to_s, :slug
 
+      def component?
+        repo? && repo.is_a?(Hash) && repo[:component].equal?(true)
+      end
+
       def repo?
         !repo.nil?
       end
@@ -44,7 +48,7 @@ module Middleman
       end
 
       def sub_project?
-        repo.is_a?(Hash) && repo[:dir]
+        repo.is_a?(Hash) && repo[:dir] && !component?
       end
 
       def version_from_branch(branch)

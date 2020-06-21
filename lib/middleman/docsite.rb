@@ -65,7 +65,13 @@ module Middleman
           projects_dir.join(name).join(branch)
         end
 
-      from = clone_dir.join('docsite/source').realpath
+      from =
+        if project.component?
+          clone_dir.join("docsite/#{project.repo[:dir]}/source").realpath
+        else
+          clone_dir.join('docsite/source').realpath
+        end
+
       dir = source_dir.join(slug)
       link = dir.join(version)
 
