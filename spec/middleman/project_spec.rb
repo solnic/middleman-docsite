@@ -25,5 +25,15 @@ RSpec.describe Middleman::Docsite::Project do
         expect(project.latest_version).to eql("2.4.1")
       end
     end
+
+    context "with master" do
+      let(:attributes) do
+        { versions: [{ value: 'master' }] }
+      end
+
+      it 'returns master as the latest version' do
+        expect(project.latest_version).to eql("master")
+      end
+    end
   end
 end
