@@ -50,29 +50,23 @@ module Middleman
     end
 
     # rubocop:disable Metrics/AbcSize
-    def self.symlink_repo(project, options = {})
-      branch = options.fetch(:branch)
-
-      name = project.name
-      slug = project.slug
-      project_dir = project.dir_name
-      version = project.version_from_branch(branch)
-
+    def self.symlink_repo(project, branch:, dir: project.slug, component: false)
       clone_dir =
-        if project.sub_project?
-          projects_dir.join(name).join(branch).join(project_dir)
+        if dir != project.slug && !component
+          projects_dir.join(project.name).join(branch).join(dir)
         else
-          projects_dir.join(name).join(branch)
+          projects_dir.join(project.name).join(branch)
         end
 
       from =
-        if project.component?
-          clone_dir.join("docsite/#{project.repo[:dir]}/source").realpath
+        if component
+          clone_dir.join("docsite/#{dir}/source").realpath
         else
           clone_dir.join('docsite/source').realpath
         end
 
-      dir = source_dir.join(slug)
+      version = project.version_from_branch(branch)
+      dir = source_dir.join(project.slug)
       link = dir.join(version)
 
       return if link.exist?

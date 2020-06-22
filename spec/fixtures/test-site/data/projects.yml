@@ -18,20 +18,18 @@
       branch: "doc-importer"
 -
   name: "sub-project"
-  repo:
-    url: "https://github.com/solnic/middleman-docsite.git"
-    dir: "sub_project"
+  repo: "https://github.com/solnic/middleman-docsite.git"
   versions:
     -
+      dir: "sub_project"
       value: "0.3"
       branch: "master"
 -
   name: "component"
-  repo:
-    url: "/Users/solnic/Workspace/middleman-docsite"
-    dir: "component"
-    component: true
+  repo: "https://github.com/solnic/middleman-docsite.git"
   versions:
     -
       value: "0.4"
       branch: "master"
+      dir: "component"
+      component: true

@@ -9,7 +9,7 @@ RSpec.describe Middleman::Docsite do
 
   describe '#projects' do
     it 'returns projects loaded from data/projects.yml' do
-      expect(projects.size).to be(4)
+      expect(projects.size).to be(5)
 
       p1, p2, p3 = projects
 
@@ -22,10 +22,10 @@ RSpec.describe Middleman::Docsite do
       expect(p2.repo?).to be(false)
       expect(p2.versions).to eql(['0.1', '0.2'])
 
-      expect(p3.name).to eql('middleman-docsite')
+      expect(p3.name).to eql('component')
       expect(p3.repo?).to be(true)
       expect(p3.repo).to eql('https://github.com/solnic/middleman-docsite.git')
-      expect(p3.versions).to eql([{ value: '0.1', branch: 'doc-importer' }])
+      expect(p3.versions).to eql([{ value: '0.4', branch: 'master', component: true, dir: 'component' }])
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe Middleman::Docsite do
           .map(&Pathname.method(:new)).map(&:basename)
 
         target_files = Dir[FIXTURES.join('test-gem/docsite/**/*.*')]
-          .map(&Pathname.method(:new)).map(&:basename)
+          .map(&Pathname.method(:new)).map(&:basename).uniq
 
         expect(source_files).to eql(target_files)
       end
@@ -80,7 +80,7 @@ RSpec.describe Middleman::Docsite do
       it 'symlinks sub-project dir from the repository' do
         site.clone_repo(project, branch: 'master')
 
-        site.symlink_repo(project, branch: 'master')
+        site.symlink_repo(project, branch: 'master', dir: 'sub_project')
 
         symlink_path = site.root.join('source/gems/sub-project/0.3')
 
@@ -104,7 +104,7 @@ RSpec.describe Middleman::Docsite do
       it 'symlinks sub-component dir from the repository' do
         site.clone_repo(project, branch: 'master')
 
-        site.symlink_repo(project, branch: 'master')
+        site.symlink_repo(project, branch: 'master', component: true)
 
         symlink_path = site.root.join('source/gems/component/0.4')
 

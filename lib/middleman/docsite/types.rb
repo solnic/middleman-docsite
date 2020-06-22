@@ -7,18 +7,15 @@ module Middleman
     module Types
       include Dry.Types
 
-      Repo = Types::String |
-             Types::Hash.schema(
-               url: Types::String,
-               dir: Types::String,
-               component?: Types::Bool.default(false)
-             ).with_key_transform(&:to_sym)
+      Repo = Types::String.constrained(filled: true)
 
       Version = Types::Hash
         .schema(
           value: Types::String,
           branch?: Types::String,
-          tag?: Types::String
+          tag?: Types::String,
+          dir?: Types::String,
+          component?: Types::Bool
         )
         .with_key_transform(&:to_sym)
 
