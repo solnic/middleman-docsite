@@ -80,11 +80,11 @@ module Middleman
       end
 
       def inch_url
-        "http://inch-ci.org/github/#{org}/#{name}"
+        "https://inch-ci.org/github/#{org}/#{name}"
       end
 
       def inch_badge
-        "http://inch-ci.org/github/#{org}/#{name}.svg?branch=master&style=flat"
+        "https://inch-ci.org/github/#{org}/#{name}.svg?branch=master&style=flat"
       end
 
       def api_url
