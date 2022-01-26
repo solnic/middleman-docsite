@@ -14,9 +14,9 @@ module Middleman
   module Docsite
     extend Dry::Configurable
 
-    setting :project_class, Docsite::Project, reader: true
-    setting :projects_subdir, 'gems', reader: true
-    setting :root, Pathname(Dir.pwd).realpath, reader: true
+    setting :project_class, default: Docsite::Project, reader: true
+    setting :projects_subdir, default: 'gems', reader: true
+    setting :root, default: Pathname(Dir.pwd).realpath, reader: true
 
     def self.projects
       @projects ||= YAML.load_file(data_path.join('projects.yml'))
